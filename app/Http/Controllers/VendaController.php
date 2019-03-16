@@ -57,8 +57,14 @@ class VendaController extends Controller
 	
 	public function edit($id)
 	{
+        $venda = $this->vendaService->findById($id);
+
+        if( $venda->situacao == 'finalizada' ){
+            Session::flash('messageErro', 'Venda ja foi finalizada. Não é possível editar.');
+            return Redirect::to('venda');
+        }
+
 		$produtos = $this->vendaService->getProdutos();
-		$venda = $this->vendaService->findById($id);
 		$vendasProdutos = $this->vendaService->getSaidaProdutos($id);
 		
 		return View::make('venda.edit')

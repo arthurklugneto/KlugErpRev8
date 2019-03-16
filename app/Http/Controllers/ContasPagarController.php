@@ -67,7 +67,13 @@ class ContasPagarController extends Controller
 
     public function edit($id)
     {
-    	$contaPagar = $this->contaPagarService->findById($id);
+        $contaPagar = $this->contaPagarService->findById($id);
+        
+        if( $contaPagar->situacao == 'finalizada' ){
+            Session::flash('messageErro', 'Conta ja foi finalizada. Não é possível editar.');
+            return Redirect::to('contasPagar');
+        }
+
     	$contaPagarPagamentos = $this->contaPagarService->getContaPagamentos($id);
     	$formasPagamento = $this->contaPagarService->getFormasPagamento();
     	return View::make('contasPagar.edit')
