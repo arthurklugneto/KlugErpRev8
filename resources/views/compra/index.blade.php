@@ -1,5 +1,18 @@
 @extends('layouts.application') @section('content')
 <div class="m-content">
+    @if (Session::has('messageErro'))
+    <div class="row">
+        <div class="col-md-12">
+            <div class="m-alert m-alert--outline alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                <strong>
+                    Atenção.
+                </strong>
+                {{ Session::get('messageErro') }}.
+            </div>
+        </div>
+    </div>
+    @endif
     @if (Session::has('message'))
     <div class="row">
         <div class="col-md-12">

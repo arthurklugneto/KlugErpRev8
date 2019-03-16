@@ -59,11 +59,17 @@ class CompraController extends Controller
 	}
 	
 	public function edit($id)
-	{
+	{   
+        $compra = $this->compraService->findById($id);
+
+        if( $compra->situacao == 'finalizada' ){
+            Session::flash('messageErro', 'Compra ja foi finalizada. Não é possível editar.');
+            return Redirect::to('compra');
+        }
+
 		$produtos = $this->compraService->getProdutos();
-		$compra = $this->compraService->findById($id);
-		$comprasProdutos = $this->compraService->getEntradaProdutos($id);
-		
+        $comprasProdutos = $this->compraService->getEntradaProdutos($id);
+        
 		return View::make('compra.edit')
 		->with('produtos', $produtos)
 		->with('compra', $compra)

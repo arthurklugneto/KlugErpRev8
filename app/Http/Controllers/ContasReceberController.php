@@ -66,7 +66,13 @@ class ContasReceberController extends Controller
 
     public function edit($id)
     {
-    	$contaReceber = $this->contaReceberService->findById($id);
+        $contaReceber = $this->contaReceberService->findById($id);
+        
+        if( $contaReceber->situacao == 'finalizada' ){
+            Session::flash('messageErro', 'Conta ja foi finalizada. Não é possível editar.');
+            return Redirect::to('contasReceber');
+        }
+
     	$contaReceberRecebimentos = $this->contaReceberService->getContaRecebimentos($id);
     	$formasPagamento = $this->contaReceberService->getFormasPagamento();
     	

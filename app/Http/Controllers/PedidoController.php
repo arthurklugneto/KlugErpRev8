@@ -62,8 +62,13 @@ class PedidoController extends Controller
 
     public function edit($id)
     {
+        $pedido = $this->pedidoService->findById($id);
+        if( $pedido->situacao == 'finalizado' ){
+            Session::flash('messageErro', 'Pedido ja foi finalizado. Não é possível editar.');
+            return Redirect::to('pedido');
+        }
+
         $produtos = $this->pedidoService->getProdutos();
-		$pedido = $this->pedidoService->findById($id);
 		$pedidoProdutos = $this->pedidoService->getPedidoProdutos($id);
 		
 		return View::make('pedido.edit')
