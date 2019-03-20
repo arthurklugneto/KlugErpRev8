@@ -111,16 +111,19 @@ class ContaReceberService{
 
     public function addRecebimento($inputs,$id){
         $pagamento = new ContaReceberFormaPagamento;
-    	$pagamento->valor = $inputs['valorPagamento'];
+        $conta = ContaReceber::find($id);
+        $valorPagamento = $inputs['valorPagamento'];
+        
+        $valorRestante = $conta->valorLiquido - $conta->valorRecebido;
+        $valorAPagar = $valorRestante < $valorPagamento ? $valorRestante : $valorPagamento;
+        
+        $pagamento->valor = $valorAPagar;
     	$pagamento->forma_pagamentos_id = $inputs['formasPagamento'];
     	$pagamento->conta_receber_id = $id;
-    	
     	$pagamento->save();
     	
-    	$conta = ContaReceber::find($id);
-    	
     	$valorRecebido = $conta->valorRecebido;
-    	$valorRecebido += $inputs['valorPagamento'];
+    	$valorRecebido += $valorAPagar;
     	
     	$conta->valorRecebido = $valorRecebido;
         $conta->dataRecebimento = Carbon::now();

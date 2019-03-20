@@ -114,17 +114,21 @@ class ContaPagarService{
     }
 
     public function addPagamento($inputs,$id){
+        
         $pagamento = new ContaPagarFormaPagamento;
-    	$pagamento->valor = $inputs['valorPagamento'];
+        $conta = ContaPagar::find($id);
+        $valorPagamento = $inputs['valorPagamento'];
+        
+        $valorRestante = $conta->valorLiquido - $conta->valorPago;
+        $valorAPagar = $valorRestante < $valorPagamento ? $valorRestante : $valorPagamento;
+
+        $pagamento->valor = $valorAPagar;
     	$pagamento->forma_pagamentos_id = $inputs['formasPagamento'];
     	$pagamento->conta_pagar_id = $id;
-    	 
     	$pagamento->save();
     	 
-    	$conta = ContaPagar::find($id);
-    	 
     	$valorPago = $conta->valorPago;
-    	$valorPago += $inputs['valorPagamento'];
+    	$valorPago += $valorAPagar;
     	 
     	$conta->valorPago = $valorPago;
     	$conta->dataPagamento = Carbon::now();	 
