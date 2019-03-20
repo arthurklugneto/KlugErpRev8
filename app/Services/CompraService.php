@@ -145,21 +145,24 @@ class CompraService{
 		$registro->delete();
     }
 
-    public function adicionarPagamento($inputs,$id){
+    public function adicionarPagamento($inputs,$id){        
+        $compra = Entrada::find($id);
+        $valorPago = $compra->valorPago;
+        $valorPagamento = $inputs['valorPagamento'];
+
+        if( $valorPagamento > $compra->valor - $compra->valorPago ){
+            $valorPagamento = $compra->valor - $compra->valorPago;
+        }
+		$valorPago += $valorPagamento;		
+		$compra->valorPago = $valorPago;		
+        $compra->situacao = $this->adjustSitucao($compra->valor,$compra->valorPago);
+        
         $pagamento = new EntradaFormaPagamento;
-		$pagamento->valor = $inputs['valorPagamento'];
+		$pagamento->valor = $valorPagamento;
 		$pagamento->forma_pagamentos_id = $inputs['formasPagamento'];
 		$pagamento->entrada_id = $id;
 		
         $pagamento->save();
-        
-        $compra = Entrada::find($id);
-		$valorPago = $compra->valorPago;
-		$valorPago += $inputs['valorPagamento'];
-		
-		$compra->valorPago = $valorPago;
-		
-		$compra->situacao = $this->adjustSitucao($compra->valor,$compra->valorPago);
 				
 		$compra->save();
     }

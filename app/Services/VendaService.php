@@ -145,22 +145,24 @@ class VendaService{
     }
 
     public function adicionarPagamento($inputs,$id){
+		$venda = Saida::find($id);		
+        $valorPago = $venda->valorRecebido;
+        $valorPagamento = $inputs['valorPagamento'];
+
+        if( $valorPagamento > $venda->valor - $venda->valorRecebido ){
+            $valorPagamento = $venda->valor - $venda->valorRecebido;
+        }
+		$valorPago += $valorPagamento;
+		$venda->valorRecebido = $valorPago;
+		$venda->situacao = $this->adjustSitucao($venda->valor,$venda->valorRecebido);
+        
         $pagamento = new SaidaFormaPagamento;
-		$pagamento->valor = $inputs['valorPagamento'];
+		$pagamento->valor = $valorPagamento;
 		$pagamento->forma_pagamentos_id = $inputs['formasPagamento']; 
 		$pagamento->saida_id = $id;
 		
 		$pagamento->save();
-		
-		$venda = Saida::find($id);
-		
-		$valorPago = $venda->valorRecebido;
-		$valorPago += $inputs['valorPagamento'];
-		
-		$venda->valorRecebido = $valorPago;
-		
-		$venda->situacao = $this->adjustSitucao($venda->valor,$venda->valorRecebido);
-		
+
         $venda->save();
     }
 
