@@ -34,8 +34,9 @@ class CategoriasProdutoController extends Controller
 		return View::make('categoriasProduto.create');
 	}
 	
-	public function store()
+	public function store(Request $request)
 	{
+        
 		$rules = array(
 				'nome'       => 'required'
 		);
@@ -50,7 +51,7 @@ class CategoriasProdutoController extends Controller
 		
 			Session::flash('message', 'Categoria adicionada com sucesso!');
 			return Redirect::to('categoriasProduto');
-		}
+        }
 	}
 	
 	public function show($id)

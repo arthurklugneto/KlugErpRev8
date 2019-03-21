@@ -16,7 +16,7 @@
                 {{ Form::open(array('url' => 'venda/'.$venda->id.'/edit')) }}
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">{{ Form::label('produtos', 'Categoria') }}
+                            <div class="form-group">{{ Form::label('produtos', 'Produto') }}
                                 {{ Form::select('produtos', $produtos, null, array('class' =>
                                 'form-control')) }}</div>
                         </div>
@@ -42,6 +42,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Codigo</th>
                                     <th>Nome</th>
                                     <th>Quantidade</th>
@@ -54,6 +55,9 @@
                             @foreach($vendasProdutos as $key => $value)
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <img width="64" height="64" class='img-upload' src='{{ url("storage/products/{$value->produto->caminhoFoto}") }}' onerror="this.src='{{ url("storage/noPhoto.jpg") }}';"/>
+                                    </td>
                                     <td>{{ $value->produto->codigo }}</td>
                                     <td>{{ $value->produto->nome }}</td>
                                     <td>{{ $value->quantidade }}</td>

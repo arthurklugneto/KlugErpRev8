@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\ProdutoService;
+use App\Services\FotoService;
 use Validator;
 use View;
 use Illuminate\Support\Facades\Input;
@@ -14,11 +15,13 @@ class ProdutoController extends Controller
 {
 
     protected $produtoService;
+    protected $fotoService;
     
-	public function __construct(ProdutoService $produtoService)
+	public function __construct(ProdutoService $produtoService,FotoService $fotoService)
 	{
         $this->middleware('auth');
         $this->produtoService = $produtoService;
+        $this->fotoService = $fotoService;
 	}
 	
 	public function index()
@@ -39,9 +42,9 @@ class ProdutoController extends Controller
 		->with('proximoCodigo',$proximoCodigo);
 	}
 	
-	public function store()
+	public function store(Request $request)
 	{
-
+        
 		$rules = array(
 				'codigo' => 'required|numeric',
 				'nome' => 'required',
@@ -54,12 +57,24 @@ class ProdutoController extends Controller
 			return Redirect::to('produto/create')
 			->withErrors($validator);
 		} else {
-	
-			$this->produtoService->save(Input::all());
+
+            $fotoName = null;
+    
+            if( $request->fotoProduto != null ){
+                if($this->fotoService->isValidPhoto($request->fotoProduto)){
+                    $fotoName = $this->fotoService->storePhoto($request->fotoProduto);                  
+                }else{
+                    return Redirect::to('produto/create')
+                    ->withErrors('A foto do produto deve ser no formato JPG ou PNG e ter no máximo 200KB de tamanho.');
+                }
+            }
+            
+			$this->produtoService->save(Input::all(),$fotoName);
 	
 			Session::flash('message', 'Produto adicionado com sucesso!');
 			return Redirect::to('produto');
         }
+        
 	}
 	
 	public function show($id)
@@ -82,7 +97,7 @@ class ProdutoController extends Controller
 	
 	public function update($id)
 	{
-		
+        
 		$rules = array(
 				'codigo' => 'required',
 				'nome' => 'required',
@@ -100,8 +115,9 @@ class ProdutoController extends Controller
 		
 			Session::flash('message', 'Produto alterado com sucesso!');
 			return Redirect::to('produto');
-		}
-	}
+        }
+
+    }
 	
 	public function destroy($id)
 	{
@@ -112,8 +128,9 @@ class ProdutoController extends Controller
 		}
 		else
 		{
-			$this->produtoService->remove($id);
-			
+            $this->fotoService->deletePhoto($id);
+            $this->produtoService->remove($id);
+            			
 			Session::flash('message', 'Produto apagado com sucesso!');
 			return Redirect::to('produto');
 		}

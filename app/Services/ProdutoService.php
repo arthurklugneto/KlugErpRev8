@@ -10,7 +10,7 @@ use App\EntradaProduto;
 use DB;
 
 class ProdutoService{
-
+    
     public function getAll(){
         return Produto::all();
     }
@@ -31,14 +31,15 @@ class ProdutoService{
         $registro->delete();
     }
 
-    public function save($inputs){
+    public function save($inputs,$photoName){
         $custo = str_replace(",", ".", $inputs['precoCusto']);
 		$venda = str_replace(",", ".", $inputs['precoVenda']);
 		$margem = str_replace(",", ".", $inputs['margem']);
 			
 		$registro = new Produto;
 		$registro->codigo = $inputs['codigo'];
-		$registro->codigoEan = $inputs['codigoEan'];
+        $registro->codigoEan = $inputs['codigoEan'];
+        $registro->caminhoFoto = $photoName;
 		$registro->nome = $inputs['nome'];
 		$registro->precoCusto = $custo;
 		$registro->precoVenda = $venda;
