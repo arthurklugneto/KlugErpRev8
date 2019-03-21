@@ -18,6 +18,7 @@ class CreateProdutosTable extends Migration
             
             $table->integer('codigo')->unique();
             $table->string('codigoEan')->nullable();
+            $table->string('caminhoFoto')->nullable();
             $table->string('nome');
             
             $table->decimal('precoCusto', 10, 2);

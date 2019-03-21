@@ -1,4 +1,10 @@
 @extends('layouts.application') @section('content')
+<style>
+.img-upload{
+    width: 64px;
+    height: 64px;
+}
+</style>
 <div class="m-content">
     @if (Session::has('messageErro'))
     <div class="row">
@@ -50,6 +56,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th></th>
                                     <th>Código</th>
                                     <th>Nome</th>
                                     <th>Estoque</th>
@@ -66,6 +73,9 @@
                                 @foreach($produtos as $key => $value)
                                 <tr class="odd gradeX">
                                     <td><a href="{{ URL::to('produto/' . $value->produto->id ) }}" class="btn btn-square btn-sm btn-metal">{{ $value->id }}</a></td>
+                                    <td>
+                                    <img class='img-upload' src='{{ url("storage/products/{$value->produto->caminhoFoto}") }}' onerror="this.src='{{ url("storage/noPhoto.jpg") }}';"/>
+                                    </td>
                                     <td>{{$value->produto->codigo}}</td>
                                     <td>{{$value->produto->nome}}</td>
                                     <td>{{$value->quantidade}}</td>

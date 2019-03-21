@@ -52,6 +52,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Services\RelatorioService', function($app){
             return new \App\Services\RelatorioService();
         });
+        $this->app->bind('App\Services\FotoService', function($app){
+            return new \App\Services\FotoService();
+        });
     }
 
     /**
