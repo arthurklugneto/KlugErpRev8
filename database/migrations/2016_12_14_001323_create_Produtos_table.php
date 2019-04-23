@@ -25,8 +25,11 @@ class CreateProdutosTable extends Migration
             $table->decimal('precoVenda', 10, 2);
             $table->decimal('margem', 10, 2);
             
-            $table->integer('categoria_id')->unsigned();
+            $table->integer('categoria_id')->unsigned()->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias_produtos');
+
+            $table->integer('fornecedor_id')->unsigned()->nullable();
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedors');
             
             $table->timestamps();
         });
