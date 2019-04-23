@@ -34,11 +34,13 @@ class ProdutoController extends Controller
 	
 	public function create()
 	{
-		$categorias = $this->produtoService->getCategorias();
+        $categorias = $this->produtoService->getCategorias();
+        $fornecedores = $this->produtoService->getFornecedores();
 		$proximoCodigo = $this->produtoService->getProximoCodigo();
 		
 		return View::make('produto.create')
-		->with('categorias', $categorias)
+        ->with('categorias', $categorias)
+        ->with('fornecedores',$fornecedores)
 		->with('proximoCodigo',$proximoCodigo);
 	}
 	
@@ -87,11 +89,13 @@ class ProdutoController extends Controller
 	
 	public function edit($id)
 	{
-		$registro = $this->produtoService->findById($id);;
+        $registro = $this->produtoService->findById($id);
+        $fornecedores = $this->produtoService->getFornecedores();
 		$categorias = $this->produtoService->getCategorias();
 	
 		return View::make('produto.edit')
-		->with('produto', $registro)
+        ->with('produto', $registro)        
+        ->with('fornecedores',$fornecedores)
 		->with('categorias', $categorias);
 	}
 	

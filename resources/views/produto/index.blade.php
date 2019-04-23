@@ -82,7 +82,6 @@
                                     <td>{{$value->produto->precoCusto}}</td>
                                     <td>{{$value->produto->margem}}</td>
                                     <td>{{$value->produto->precoVenda}}</td>
-                                    <td>{{$value->produto->categoria->nome}}</td>
                                     <td>{{$value->produto->created_at}}</td>
                                     <td><a class="btn btn-small btn-success" href="{{ URL::to('produto/' . $value->produto->id . '/edit') }}">Editar</a></td>
                                     <td>

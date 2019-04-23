@@ -98,6 +98,11 @@
 					{{ Form::select('categoria_id', $categorias, null, array('class' => 'form-control selectpicker')) }}
 					</div>
 
+                    <div class="form-group">
+					{{ Form::label('fornecedor_id', 'Fornecedor') }} 
+					{{ Form::select('fornecedor_id', $fornecedores, null, array('class' => 'form-control selectpicker')) }}
+					</div>
+
 				{{ Form::submit('Gravar', array('class' => 'btn btn-primary')) }} 
 				{{ Form::close() }}
                 <script>

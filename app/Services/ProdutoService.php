@@ -7,6 +7,7 @@ use App\Estoque;
 use App\CategoriasProduto;
 use App\SaidaProduto;
 use App\EntradaProduto;
+use App\Fornecedor;
 use DB;
 
 class ProdutoService{
@@ -45,7 +46,8 @@ class ProdutoService{
 		$registro->precoVenda = $venda;
 		$registro->margem = 0;
 		if(!empty($inputs['margem']) ) $registro->margem = $margem;
-		$registro->categoria_id = $inputs['categoria_id'];
+        if(!empty($inputs['categoria_id']) ) $registro->categoria_id = $inputs['categoria_id'];
+        if(!empty($inputs['fornecedor_id']) ) $registro->fornecedor_id = $inputs['fornecedor_id'];
 		$registro->save();
 			
 		$estoque = new Estoque;
@@ -67,12 +69,17 @@ class ProdutoService{
         $registro->precoVenda = $venda;
         $registro->margem = 0;
         if(!empty($inputs['margem']) ) $registro->margem = $margem;
-        $registro->categoria_id = $inputs['categoria_id'];
+        if(!empty($inputs['categoria_id']) ) $registro->categoria_id = $inputs['categoria_id'];
+        if(!empty($inputs['fornecedor_id']) ) $registro->fornecedor_id = $inputs['fornecedor_id'];
         $registro->save();
     }
 
     public function getCategorias(){
         return CategoriasProduto::pluck('nome','id');
+    }
+
+    public function getFornecedores(){
+        return Fornecedor::pluck('nome','id');
     }
 
     public function getProximoCodigo(){
