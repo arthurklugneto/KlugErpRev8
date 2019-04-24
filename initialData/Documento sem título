@@ -1,0 +1,48 @@
+import os,sys
+
+if( len(sys.argv) < 2 ):
+    print('Wrong parameters. Usage: python ./initialData.py MODE [create, clean, files,...]')
+    sys.exit(1)
+
+mode = sys.argv[1]
+
+def copyFiles():
+    os.system('cp -a ./productPhotos/. ../public/storage/products/')
+
+def removeOldData():
+    os.system('mysql -u root -psenha -D klugerp_r8 -e "DELETE FROM estoque WHERE id>0;COMMIT;"')
+    os.system('mysql -u root -psenha -D klugerp_r8 -e "DELETE FROM produtos WHERE id>0;COMMIT;"')
+    os.system('mysql -u root -psenha -D klugerp_r8 -e "DELETE FROM fornecedors WHERE id>0;COMMIT;"')
+    os.system('mysql -u root -psenha -D klugerp_r8 -e "DELETE FROM clientes WHERE id>0;COMMIT;"')
+    os.system('mysql -u root -psenha -D klugerp_r8 -e "DELETE FROM categorias_produtos WHERE id>0;COMMIT;"')
+    os.system('mysql -u root -psenha -D klugerp_r8 -e "DELETE FROM forma_pagamentos WHERE id>0;COMMIT;"')
+    os.system('mysql -u root -psenha -D klugerp_r8 -e "DELETE FROM plano_contas WHERE id>0;COMMIT;"')
+
+def createNewData():
+    os.system('(cd /TCC/KlugERPrev8/; php artisan db:seed)')
+
+def removeFiles():
+    os.system('rm -r ../public/storage/products/')
+
+
+print('KlugERP Initial Data Tool')
+print('Mode : '+mode)
+print('-------------------------')
+
+if mode.upper() == 'CREATE':
+    print("Copiando arquivos...")
+    copyFiles()
+    print("Apagando registros antigos...")
+    removeOldData()
+    print("Criando novos registros...")
+    createNewData()
+
+if mode.upper() == 'CLEAN':
+    print("Apagando registros antigos...")
+    removeOldData()
+    print("Apagando arquivos publicos...")
+    removeFiles()
+
+
+
+

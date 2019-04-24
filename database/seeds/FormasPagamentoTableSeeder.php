@@ -11,20 +11,16 @@ class FormasPagamentoTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('forma_pagamentos')->insert([
-            'nome' => 'Dinheiro',
-        ]);
-        DB::table('forma_pagamentos')->insert([
-                'nome' => 'Cartão de Débito',
-        ]);
-        DB::table('forma_pagamentos')->insert([
-                'nome' => 'Cartão de Crédito',
-        ]);
-        DB::table('forma_pagamentos')->insert([
-            'nome' => 'Cheque',
-        ]);
-        DB::table('forma_pagamentos')->insert([
-            'nome' => 'Depósito Bancário',
-        ]);
+
+        $formasPagamento = [
+            ['nome'=>'Dinheiro','tipo' => 'vista','created_at'=>Carbon\Carbon::now(),'updated_at'=>Carbon\Carbon::now()],
+            ['nome'=>'Cartão de Débito','tipo' => 'vista','created_at'=>Carbon\Carbon::now(),'updated_at'=>Carbon\Carbon::now()],
+            ['nome'=>'Cartão de Crédito','tipo' => 'prazo','created_at'=>Carbon\Carbon::now(),'updated_at'=>Carbon\Carbon::now()],
+            ['nome'=>'Cheque','tipo' => 'vista','created_at'=>Carbon\Carbon::now(),'updated_at'=>Carbon\Carbon::now()],
+            ['nome'=>'Depósito Bancário','tipo' => 'vista','created_at'=>Carbon\Carbon::now(),'updated_at'=>Carbon\Carbon::now()]
+        ];
+        
+        DB::table('forma_pagamentos')->insert($formasPagamento);
+
     }
 }
