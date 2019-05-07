@@ -50,10 +50,10 @@
 					<thead>
 						<tr>
 							<th>#</th>
+                            <th></th>
 							<th>Situação</th>
 							<th>Cliente</th>
 							<th>Valor</th>
-							<th>Valor Recebido</th>
 							<th>Observações</th>
 							<th>Data de Venda</th>
 							<th>Data de Criação</th>
@@ -65,6 +65,11 @@
 						@foreach($vendas as $key => $value)
 						<tr class="odd gradeX">
 							<td>{{ $value->id  }}</td>
+                            <td>
+                            <button type="button" class="btn btn-sm btn-focus btn-warning" data-toggle="modal" data-target="#m_modal_{{$key}}">
+                                        <i class="flaticon-light"></i> <small> Detalhes</small>
+                                    </button>
+                            </td>
 							@if( $value->situacao == 'aberta' )
 							<td>
                                 <span class="m-badge m-badge--danger m-badge--wide m-badge--rounded">
@@ -86,7 +91,6 @@
 							@endif
 							<td>{{$value->cliente->nome}}</td>
 							<td>{{$value->valor}}</td>
-							<td>{{$value->valorRecebido}}</td>
 							<td>{{$value->observacoes}}</td>
 							<td>{{$value->dataVenda}}</td>
 							<td>{{$value->created_at}}</td>
@@ -103,6 +107,75 @@
 							</td>
 							
 						</tr>
+
+                        <div class="modal fade" id="m_modal_{{$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                            <i class="flaticon-light"></i> Detalhes da Venda
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">
+                                                    &times;
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <small class="m--font-transform-u">cliente</small>
+                                                    <h5>{{ $value->cliente->nome}}</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <small class="m--font-transform-u">Situação</small>
+                                                    @if( $value->situacao == 'aberta' )
+                                                    <span class="m-badge m-badge--danger m-badge--wide m-badge--rounded">
+                                                            aberto
+                                                        </span>
+                                                    @elseif( $value->situacao == 'finalizada' )
+                                                    <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">
+                                                            finalizada
+                                                        </span>
+                                                    @else
+                                                        <span class="m-badge m-badge--warning m-badge--wide m-badge--rounded">
+                                                            incompleta
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <small class="m--font-transform-u">data de venda</small>
+                                                    <h5>{{ $value->dataVenda}}</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <small class="m--font-transform-u">vendedor</small>
+                                                    <h5>{{ $value->vendedor->nome }}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <small class="m--font-transform-u">total</small>
+                                                    <h5>R${{ $value->valor}}</h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <small class="m--font-transform-u">recebido</small>
+                                                    <h5>R${{ $value->valorRecebido }}</h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <small class="m--font-transform-u">comissão</small>
+                                                    <h5>R${{ $value->valorComissao }}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                            </div>
+                                            <div class="row">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 						@endforeach
 					</tbody>
 				</table>

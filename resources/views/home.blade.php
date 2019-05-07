@@ -24,7 +24,8 @@
                                     <div class="row m-row--no-padding align-items-center">
                                         <div class="col">
                                             <h3 class="m-widget1__title">
-                                                {{ $dados['topProduto'] }}[{{ $dados['topProdutoQtde'] }}]
+                                            {{ $produtoMaisVendido['nome'] }}
+                                            <i><strong>[{{ $produtoMaisVendido['occurrences']}} itens vendidos.]</strong></i>
                                             </h3>
                                             <span class="m-widget1__desc">
                                                 Produto mais vendido.

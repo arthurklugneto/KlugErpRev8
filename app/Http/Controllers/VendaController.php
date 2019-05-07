@@ -31,11 +31,13 @@ class VendaController extends Controller
 	public function create()
 	{
 		$clientes = $this->vendaService->getClientes();
-		$produtos = $this->vendaService->getProdutos();
+        $produtos = $this->vendaService->getProdutos();
+        $vendedores = $this->vendaService->getVendedores();
 		
 		return View::make('venda.create')
 		->with('clientes', $clientes)
-		->with('produtos', $produtos);
+        ->with('produtos', $produtos)
+        ->with('vendedores', $vendedores);
 	}
 	
 	public function store()

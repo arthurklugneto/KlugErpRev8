@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Saida;
 use App\SaidaProduto;
 use App\Produto;
+use App\Vendedor;
 use App\FormaPagamento;
 use App\SaidaFormaPagamento;
 use App\Cliente;
@@ -51,7 +52,8 @@ class VendaService{
 
     public function save($inputs){
         $registro = new Saida;
-		$registro->cliente_id = $inputs['cliente_id'];
+        $registro->cliente_id = $inputs['cliente_id'];
+        $registro->vendedor_id = $inputs['vendedor_id'];
 		$registro->valor = 0;
 		$registro->valorRecebido = 0;
 		$registro->observacoes = $inputs['observacoes'];
@@ -81,6 +83,10 @@ class VendaService{
 
     public function getProdutos(){
         return Produto::orderBy('nome')->get()->pluck('nome','id');
+    }
+
+    public function getVendedores(){
+        return Vendedor::orderBy('nome')->get()->pluck('nome','id');
     }
 
     public function getProduto($id){
@@ -126,11 +132,13 @@ class VendaService{
 		$registro->save();
 		
 		$estoque = Estoque::all()->where('produto_id',$produto)->first();
-		
 		$estoqueAtual = $estoque->quantidade;
-		
 		$estoque->quantidade = $estoqueAtual - $quantidade;
         $estoque->save();
+        
+        $percentualComissao = $venda->vendedor->comissao;
+        $venda->valorComissao = $valor * ($percentualComissao/100);
+        $venda->save();
     }
 
     public function removeItem($id){
