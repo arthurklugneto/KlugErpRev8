@@ -55,6 +55,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Services\FotoService', function($app){
             return new \App\Services\FotoService();
         });
+        $this->app->bind('App\Services\DashboardService', function($app){
+            return new \App\Services\DashboardService();
+        });
+
+        $this->app->bind('App\Services\VendedorService', function($app){
+            return new \App\Services\VendedorService();
+        });
     }
 
     /**

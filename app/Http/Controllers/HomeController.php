@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use View;
+use App\Services\DashboardService;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -17,36 +18,33 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $dashBoardService;
+
+    public function __construct(DashboardService $dashBoardService)
     {
         $this->middleware('auth');
+        $this->dashBoardService = $dashBoardService;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-    	
+        $produtoMaisVendido = $this->dashBoardService->getMaisVendido();
+        
+        return View::make('home')
+        ->with('produtoMaisVendido', $produtoMaisVendido);
+
+    }
+
+}
+
+
+/*
+
     	$now = Carbon::now();
     	
-    	/*
-    	 * Produto mais vendido, quantidade vendas e clientes.
-    	 */
-    	
-    	//$saidas = Saida::all()->count();    	
+    		
     	$saidas = DB::table('saidas')->whereMonth('dataVenda', '=', $now->month)->count();
     	
-    	/*
-    	 * Produtos mais vendidos
-    	 */
     	$topProdutoID = DB::table('saidas_produtos')->select('produto_id', DB::raw('COUNT(produto_id) AS occurrences'))
             ->groupBy('produto_id')
             ->orderBy('occurrences', 'DESC')
@@ -72,10 +70,7 @@ class HomeController extends Controller
         	$nomeProdutoMaisVendido = $produtoMaisVendido->nome; 
         }
         
-        
-        /*
-         * Valores
-         */        
+             
         $vendasRecebidasNoMes = DB::table('saidas_formas_pagamentos')->whereIn('forma_pagamentos_id', ['1', '2'])->whereMonth('created_at', '=', $now->month)->sum('valor');
         $contasRecebidasNoMes = DB::table('contas_receber')->whereMonth('dataRecebimento', '=', $now->month)->sum('valorRecebido');
         $contasPagasNoMes = DB::table('contas_pagar')->whereMonth('dataPagamento', '=', $now->month)->sum('valorPago');
@@ -85,13 +80,7 @@ class HomeController extends Controller
         
         $consolidacaoMes = ($vendasRecebidasNoMes + $contasRecebidasNoMes) - ($contasPagasNoMes + $comprasRecebidasNoMes);
         
-        
-        
-        //contasPagasMes
-        
-        /*
-         * Passa valores no array
-         */        
+            
     	$dadosArray = array(
     			
     			'qtdVendas' => $saidas,
@@ -106,6 +95,4 @@ class HomeController extends Controller
     	);
     	return View::make('home')
     	->with('dados', $dadosArray);
-    	
-    }
-}
+*/

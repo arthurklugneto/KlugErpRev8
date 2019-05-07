@@ -23,9 +23,14 @@
                 </div>
                 {{ Form::open(array('url' => 'venda')) }}
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-4">
 							<div class="form-group">{{ Form::label('cliente_id', 'Cliente') }}
 								{{ Form::select('cliente_id', $clientes, null, array('class' =>
+								'form-control selectpicker')) }}</div>
+						</div>
+                        <div class="col-md-4">
+							<div class="form-group">{{ Form::label('vendedor_id', 'Vendedor') }}
+								{{ Form::select('vendedor_id', $vendedores, null, array('class' =>
 								'form-control selectpicker')) }}</div>
 						</div>
 						<div class="col-md-4">

@@ -205,6 +205,14 @@
 									</span>
 								</a>
 							</li>
+                            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
+                                <a  href="/vendedores" class="m-menu__link m-menu__toggle">
+                                        <i class="m-menu__link-icon la la-user-plus"></i>
+									<span class="m-menu__link-text">
+										Vendedores
+									</span>
+								</a>
+							</li>
                             <li class="m-menu__section">
 								<h3 class="m-menu__section-text">
 									Movimentos

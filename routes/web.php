@@ -21,6 +21,7 @@ Route::resource('categoriasProduto', 'CategoriasProdutoController');
 Route::resource('produto', 'ProdutoController');
 Route::resource('cliente', 'ClienteController');
 Route::resource('fornecedor', 'FornecedorController');
+Route::resource('vendedores', 'VendedoresController');
 
 // VENDAS
 Route::resource('venda', 'VendaController');
