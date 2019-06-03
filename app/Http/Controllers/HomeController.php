@@ -29,10 +29,30 @@ class HomeController extends Controller
     public function index()
     {
         $produtoMaisVendido = $this->dashBoardService->getMaisVendido();
+
+        $vendasTotal = $this->dashBoardService->getTotalVendas();
+        $valorRecebido = $this->dashBoardService->getVendasRecebidas();
+        $valorAReceber = $this->dashBoardService->getVendasReceber();
+
+        $comprasTotal = $this->dashBoardService->getTotalCompra();
+        $valorPago = $this->dashBoardService->getComprasPagas();
+        $valorAPagar = $this->dashBoardService->getComprasPagar();
         
         return View::make('home')
-        ->with('produtoMaisVendido', $produtoMaisVendido);
+        ->with('produtoMaisVendido', $produtoMaisVendido)
 
+        ->with('vendasTotal', $this->formatMoney($vendasTotal))
+        ->with('valorRecebido', $this->formatMoney($valorRecebido))
+        ->with('valorAReceber', $this->formatMoney($valorAReceber))
+
+        ->with('comprasTotal', $this->formatMoney($comprasTotal))
+        ->with('valorPago', $this->formatMoney($valorPago))
+        ->with('valorAPagar', $this->formatMoney($valorAPagar));
+
+    }
+
+    public function formatMoney($input){
+        return 'R$'.$input;
     }
 
 }

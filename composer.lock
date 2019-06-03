@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bca9933d9e58ee25a2d8c69df5c26af",
+    "content-hash": "6896eac4b25ee8cf7d79ed2c16d092ca",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -818,30 +818,28 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.9",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "e115760c879a7b647adf38006be015badd2ffbdd"
+                "reference": "968614f8087d2b259b040b3884cbe7742dd89960"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/e115760c879a7b647adf38006be015badd2ffbdd",
-                "reference": "e115760c879a7b647adf38006be015badd2ffbdd",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/968614f8087d2b259b040b3884cbe7742dd89960",
+                "reference": "968614f8087d2b259b040b3884cbe7742dd89960",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*",
-                "opis/closure": "^3.1",
+                "illuminate/support": "^5.5",
                 "php": "^7.0",
-                "phpoffice/phpspreadsheet": "^1.6"
+                "phpoffice/phpspreadsheet": "^1.4"
             },
             "require-dev": {
                 "mockery/mockery": "^1.1",
-                "orchestra/database": "^3.8",
-                "orchestra/testbench": "^3.8",
-                "phpunit/phpunit": "^8.0",
+                "orchestra/database": "^3.6",
+                "orchestra/testbench": "^3.6",
+                "phpunit/phpunit": "^7.0",
                 "predis/predis": "^1.1"
             },
             "type": "library",
@@ -882,7 +880,7 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "time": "2019-02-28T14:43:36+00:00"
+            "time": "2018-10-03T09:15:48+00:00"
         },
         {
             "name": "markbaker/complex",

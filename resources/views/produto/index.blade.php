@@ -97,7 +97,8 @@
                         <script>
                         $(document).ready(function() {
                             $.noConflict();
-                            var table = $('#registros').DataTable();
+                            console.log($('#registros').DataTable());
+                            //var table = $('#registros').DataTable();
                         });
                         </script>
                     </div>

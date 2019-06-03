@@ -35,7 +35,7 @@
 
     </head>
 
-    <body  class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+    <body  class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 			<!-- BEGIN: Header -->
@@ -46,14 +46,13 @@
 						<div class="m-stack__item m-brand  m-brand--skin-dark ">
 							<div class="m-stack m-stack--ver m-stack--general">
 								<div class="m-stack__item m-stack__item--middle m-brand__logo">
-									<a href="index.html" class="m-brand__logo-wrapper">
+									<a href="/" class="m-brand__logo-wrapper">
 										<img alt="" src="/assets/demo/default/media/img/logo/logo_default_dark.png"/>
 									</a>
 								</div>
 								<div class="m-stack__item m-stack__item--middle m-brand__tools">
 									<!-- BEGIN: Left Aside Minimize Toggle -->
-									<a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block 
-					 ">
+									<a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block">
 										<span></span>
 									</a>
 									<!-- END -->
@@ -76,18 +75,13 @@
 							</div>
 						</div>
 						<!-- END: Brand -->
-						<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
-							<!-- BEGIN: Horizontal Menu -->
+						<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav " style="background:#302B3E">
 							<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark " id="m_aside_header_menu_mobile_close_btn">
 								<i class="la la-close"></i>
 							</button>
 							<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "  >
 								
 							</div>
-                            <!-- END: Horizontal Menu -->								
-                            <!-- BEGIN: Topbar -->
-							
-							<!-- END: Topbar -->
 						</div>
 					</div>
 				</div>
@@ -117,7 +111,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-home"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Início
 									</span>
 								</a>
@@ -126,21 +120,35 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/home" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-user-plus"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Administrativo
 									</span>
 								</a>
 							</li>
+                            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+                                <form role="form" method="POST" action="{{ url('/logout') }}" style="margin-left:32px;">
+                                    {{ csrf_field() }}
+                                    <a  href="#" onclick="this.parentNode.submit()" class="m-menu__link m-menu__toggle">
+                                        <i class="m-menu__link-icon la la-sign-out" style="color:#574E6F;margin-right:12px;"></i>
+                                        <span class="m-menu__link-text" style="color:white;">
+                                            Sair
+                                        </span>
+								    </a>                                    
+                                </form>
+                            </li>
+                            <!-- <input class="m-menu__link-text" style="color:white;" type="submit" value="Sair"> -->
                             @else
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/login" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-external-link-square"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Entrar
 									</span>
 								</a>
 							</li>
-                            @endif	
+                            @endif
+
+                            @if (Auth::user())	
                             <li class="m-menu__section">
 								<h3 class="m-menu__section-text">
 									Cadastros
@@ -150,7 +158,7 @@
                             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  m-menu-submenu-toggle="hover">
 								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
 									<i class="m-menu__link-icon la la-gift"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Produtos
 									</span>
 									<i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -163,7 +171,7 @@
 												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 													<span></span>
 												</i>
-												<span class="m-menu__link-text">
+												<span class="m-menu__link-text" style="color:white;">
 													Categoria de Produtos
 												</span>
 											</a>
@@ -173,7 +181,7 @@
 												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 													<span></span>
 												</i>
-												<span class="m-menu__link-text">
+												<span class="m-menu__link-text" style="color:white;">
 													Produtos
 												</span>
 											</a>
@@ -184,7 +192,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/cliente" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-user"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Clientes
 									</span>
 								</a>
@@ -192,7 +200,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/fornecedor" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-users"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Fornecedores
 									</span>
 								</a>
@@ -200,7 +208,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/planoContas" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-file-archive-o"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Plano de Contas
 									</span>
 								</a>
@@ -208,7 +216,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/vendedores" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-user-plus"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Vendedores
 									</span>
 								</a>
@@ -222,7 +230,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/compra" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la 	la-cart-arrow-down"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Compras
 									</span>
 								</a>
@@ -230,7 +238,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/venda" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la 	la-cart-plus"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Vendas
 									</span>
 								</a>
@@ -238,7 +246,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/estoque" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-delicious"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Estoque
 									</span>
 								</a>
@@ -246,7 +254,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/pedido" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-gavel"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Pedidos
 									</span>
 								</a>
@@ -260,7 +268,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/contasPagar" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-minus-circle"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Contas a Pagar
 									</span>
 								</a>
@@ -268,7 +276,7 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/contasReceber" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-plus-circle"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Contas a Receber
 									</span>
 								</a>
@@ -282,11 +290,12 @@
                             <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
                                 <a  href="/relatorio" class="m-menu__link m-menu__toggle">
                                         <i class="m-menu__link-icon la la-newspaper-o"></i>
-									<span class="m-menu__link-text">
+									<span class="m-menu__link-text" style="color:white;">
 										Gerar Relatório
 									</span>
 								</a>
 							</li>
+                            @endif
                             <li class="m-menu__section">
 								<h3 class="m-menu__section-text">
 									Versão 1.0.01 TCC
@@ -311,7 +320,7 @@
 				<div class="m-container m-container--fluid m-container--full-height m-page__container">
 					<div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
 						<div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
-							<span class="m-footer__copyright">
+							<span class="m-footer__copyright" style="color:black;">
 								2019 &copy; Arthur Klug Neto
 							</span>
 						</div>

@@ -48,18 +48,18 @@
                                     <div class="row m-row--no-padding align-items-center">
                                         <div class="col">
                                             <h3 class="m-widget1__title">
-                                                Vendas Diária
+                                                Vendas
                                             </h3>
                                             <span class="m-widget1__desc">
-                                                Vendas lançadas no dia de hoje.
+                                                Total em vendas lançadas.
                                             </span>
                                         </div>
                                         <div class="col m--align-right">
                                             <p>
                                                 <i class="la la-shopping-cart" style="font-size:2em;"></i>
                                             </p>
-                                            <span class="m-widget1__number m--font-brand">
-                                                R$0,00
+                                            <span class="m-widget1__number m--font-wharever">
+                                                {{ $vendasTotal }}
                                             </span>                                            
                                         </div>
                                     </div>
@@ -72,18 +72,18 @@
                                     <div class="row m-row--no-padding align-items-center">
                                         <div class="col">
                                             <h3 class="m-widget1__title">
-                                                Vendas Recebidas Diária
+                                                Vendas Recebidas
                                             </h3>
                                             <span class="m-widget1__desc">
-                                                Vendas recebidas no dia de hoje.
+                                                Valor de vendas recebido.
                                             </span>
                                         </div>
                                         <div class="col m--align-right">
                                             <p>
                                                 <i class="la la-shopping-cart" style="font-size:2em;"></i>
                                             </p>
-                                            <span class="m-widget1__number m--font-success">
-                                                R$0,00
+                                            <span class="m-widget1__number m--font-brand">
+                                            {{ $valorRecebido }}
                                             </span>
                                         </div>
                                     </div>
@@ -99,15 +99,15 @@
                                                 Vendas A Receber
                                             </h3>
                                             <span class="m-widget1__desc">
-                                                Totalização de vendas a receber no mês.
+                                                Total a receber das vendas.
                                             </span>
                                         </div>
                                         <div class="col m--align-right">
                                             <p>
                                                 <i class="la la-cart-arrow-down" style="font-size:2em;"></i>
                                             </p>
-                                            <span class="m-widget1__number m--font-brand">
-                                            R$0,00
+                                            <span class="m-widget1__number m--font-danger">
+                                            {{ $valorAReceber }}
                                             </span>
                                         </div>
                                     </div>
@@ -127,10 +127,10 @@
                                     <div class="row m-row--no-padding align-items-center">
                                         <div class="col">
                                             <h3 class="m-widget1__title">
-                                                Compras Diária
+                                                Compras
                                             </h3>
                                             <span class="m-widget1__desc">
-                                                Compras lançadas no dia de hoje.
+                                                Valor total de compras.
                                             </span>
                                         </div>
                                         <div class="col m--align-right">
@@ -138,7 +138,7 @@
                                                 <i class="la la-credit-card" style="font-size:2em;"></i>
                                             </p>
                                             <span class="m-widget1__number m--font-brand">
-                                                R$0,00
+                                            {{ $comprasTotal }}
                                             </span>                                            
                                         </div>
                                     </div>
@@ -154,7 +154,7 @@
                                                 Compras Pagas
                                             </h3>
                                             <span class="m-widget1__desc">
-                                                Compras pagas no dia de hoje.
+                                                Compras pagas.
                                             </span>
                                         </div>
                                         <div class="col m--align-right">
@@ -162,7 +162,7 @@
                                                 <i class="la la-credit-card" style="font-size:2em;"></i>
                                             </p>
                                             <span class="m-widget1__number m--font-danger">
-                                                R$0,00
+                                            {{ $valorPago }}
                                             </span>
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
                                                 <i class="la la-credit-card" style="font-size:2em;"></i>
                                             </p>
                                             <span class="m-widget1__number m--font-danger">
-                                            R$0,00
+                                            {{ $valorAPagar }}
                                             </span>
                                         </div>
                                     </div>

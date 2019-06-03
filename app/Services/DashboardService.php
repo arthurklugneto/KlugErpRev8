@@ -9,6 +9,9 @@ class DashboardService{
 
     public function __construct(){}
 
+    /**
+     * Top Produto
+     */
     public function getMaisVendido(){
         
         $topProdutoID = DB::table('saidas_produtos')->select('produto_id', DB::raw('ROUND(SUM(quantidade)) AS occurrences'))
@@ -26,8 +29,57 @@ class DashboardService{
 
     }
 
-    public function getEstatisticasVendas(){
+    /**
+     * Vendas
+     */
+    public function getTotalVendas(){
         
+        $valorTotal = DB::table('saidas')->sum('valor');
+        return $valorTotal;
+
     }
+
+    public function getVendasRecebidas(){
+
+        $valorRecebido = DB::table('saidas')->sum('valorRecebido');
+        return $valorRecebido;
+
+    }
+
+    public function getVendasReceber(){
+
+        $total = $this->getTotalVendas();
+        $recebido = $this->getVendasRecebidas();
+
+        return $total - $recebido;
+
+    }
+
+    /**
+     * Compras
+     */
+    public function getTotalCompra(){
+        
+        $valorTotal = DB::table('entradas')->sum('valor');
+        return $valorTotal;
+
+    }
+
+    public function getComprasPagas(){
+
+        $valorRecebido = DB::table('entradas')->sum('valorPago');
+        return $valorRecebido;
+
+    }
+
+    public function getComprasPagar(){
+
+        $total = $this->getTotalCompra();
+        $pago = $this->getComprasPagas();
+
+        return $total - $pago;
+
+    }
+
 
 }
